@@ -1,11 +1,11 @@
 package backend.Module_2.dto;
 
-import backend.Module_2.Enums.BookingStatus;
+import backend.Module_2.Enums.BookingsStatus;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class BookingResponse {
+public class BookingsResponse {
 
     private Long id;
     private Long userId;
@@ -19,9 +19,9 @@ public class BookingResponse {
     private BookingStatus status;
     private String rejectionReason;
 
-    public BookingResponse() {}
+    public BookingsResponse() {}
 
-    public BookingResponse(Long id, Long userId, Long resourceId, LocalDate bookingDate,
+    public BookingsResponse(Long id, Long userId, Long resourceId, LocalDate bookingDate,
                            LocalTime startTime, LocalTime endTime, String userEmail, String purpose,
                            Integer attendees, BookingStatus status, String rejectionReason) {
         this.id = id;

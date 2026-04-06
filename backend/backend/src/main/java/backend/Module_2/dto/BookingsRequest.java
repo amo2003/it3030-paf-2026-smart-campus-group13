@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class BookingRequest {
+public class BookingsRequest {
 
     @NotNull(message = "Resource ID is required")
     private Long resourceId;
