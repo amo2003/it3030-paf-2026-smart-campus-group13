@@ -23,7 +23,7 @@ public class BookingsResponse {
 
     public BookingsResponse(Long id, Long userId, Long resourceId, LocalDate bookingDate,
                            LocalTime startTime, LocalTime endTime, String userEmail, String purpose,
-                           Integer attendees, BookingStatus status, String rejectionReason) {
+                           Integer attendees, BookingsStatus status, String rejectionReason) {
         this.id = id;
         this.userId = userId;
         this.resourceId = resourceId;
@@ -64,8 +64,8 @@ public class BookingsResponse {
     public Integer getAttendees() { return attendees; }
     public void setAttendees(Integer attendees) { this.attendees = attendees; }
 
-    public BookingStatus getStatus() { return status; }
-    public void setStatus(BookingStatus status) { this.status = status; }
+    public BookingsStatus getStatus() { return status; }
+    public void setStatus(BookingsStatus status) { this.status = status; }
 
     public String getRejectionReason() { return rejectionReason; }
     public void setRejectionReason(String rejectionReason) { this.rejectionReason = rejectionReason; }
