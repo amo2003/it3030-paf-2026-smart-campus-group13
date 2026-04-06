@@ -1,6 +1,6 @@
 package backend.Module_2.Model;
 
-import backend.Module_2.Enums.BookingStatus;
+import backend.Module_2.Enums.BookingsStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "bookings")
-public class Booking {
+public class Bookings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +29,13 @@ public class Booking {
     private Integer attendees;
 
     @Enumerated(EnumType.STRING)
-    private BookingStatus status;
+    private BookingsStatus status;
 
     private String rejectionReason;
 
-    public Booking() {}
-
-    public Booking(Long userId, Long resourceId, LocalDate bookingDate, LocalTime startTime,
-                   LocalTime endTime, String userEmail ,String purpose, Integer attendees, BookingStatus status) {
+    public Bookings() {}
+    public Bookings(Long userId, Long resourceId, LocalDate bookingDate, LocalTime startTime,
+                    LocalTime endTime, String userEmail ,String purpose, Integer attendees, BookingsStatus status) {
         this.userId = userId;
         this.resourceId = resourceId;
         this.bookingDate = bookingDate;
@@ -75,8 +74,8 @@ public class Booking {
     public Integer getAttendees() { return attendees; }
     public void setAttendees(Integer attendees) { this.attendees = attendees; }
 
-    public BookingStatus getStatus() { return status; }
-    public void setStatus(BookingStatus status) { this.status = status; }
+    public BookingsStatus getStatus() { return status; }
+    public void setStatus(BookingsStatus status) { this.status = status; }
 
     public String getRejectionReason() { return rejectionReason; }
     public void setRejectionReason(String rejectionReason) { this.rejectionReason = rejectionReason; }

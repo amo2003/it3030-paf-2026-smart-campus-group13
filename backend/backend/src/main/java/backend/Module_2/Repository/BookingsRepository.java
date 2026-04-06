@@ -1,7 +1,7 @@
 package backend.Module_2.Repository;
 
-import backend.Module_2.Enums.BookingStatus;
-import backend.Module_2.Model.Booking;
+import backend.Module_2.Enums.BookingsStatus;
+import backend.Module_2.Model.Bookings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,11 +12,11 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, Long> {
+public interface BookingsRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findByUserId(Long userId);
 
-    List<Booking> findByStatus(BookingStatus status);
+    List<Booking> findByStatus(BookingsStatus status);
 
     List<Booking> findByResourceId(Long resourceId);
 
