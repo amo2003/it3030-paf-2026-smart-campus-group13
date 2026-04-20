@@ -6,6 +6,10 @@ export const getNotificationsByUser = (userId) => {
   return axios.get(`${API_BASE}/user/${userId}`);
 };
 
+export const getUnreadCount = (userId) => {
+  return axios.get(`${API_BASE}/user/${userId}/unread-count`);
+};
+
 export const markAsRead = (id) => {
   return axios.patch(`${API_BASE}/${id}/read`);
 };

@@ -47,4 +47,12 @@ public class NotificationService {
 
         notificationRepository.delete(notification);
     }
+
+    public long getUnreadCount(Long userId) {
+    return notificationRepository.countByUserIdAndReadFalse(userId);
+}
+    public Notification createNotificationForUser(Long userId, String title, String message, String type) {
+    Notification notification = new Notification(userId, title, message, type);
+    return notificationRepository.save(notification);
+}
 }
