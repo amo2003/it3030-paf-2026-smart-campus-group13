@@ -11,9 +11,12 @@ const NotificationBell = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [open, setOpen] = useState(false);
 
-  const userId = 1; // temporary for testing
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const userId = currentUser?.id;
 
   const fetchData = async () => {
+    if (!userId) return;
+
     try {
       const notificationsRes = await getNotificationsByUser(userId);
       const unreadRes = await getUnreadCount(userId);
@@ -27,7 +30,7 @@ const NotificationBell = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [userId]);
 
   const handleMarkAsRead = async (id) => {
     try {

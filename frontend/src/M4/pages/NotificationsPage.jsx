@@ -9,9 +9,12 @@ import {
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState([]);
 
-  const userId = 1; // temporary (later from login)
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const userId = currentUser?.id;
 
   const fetchNotifications = async () => {
+    if (!userId) return;
+
     try {
       const res = await getNotificationsByUser(userId);
       setNotifications(res.data);
@@ -22,7 +25,7 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     fetchNotifications();
-  }, []);
+  }, [userId]);
 
   const handleMarkAsRead = async (id) => {
     await markAsRead(id);
@@ -30,6 +33,7 @@ const NotificationsPage = () => {
   };
 
   const handleMarkAll = async () => {
+    if (!userId) return;
     await markAllAsRead(userId);
     fetchNotifications();
   };
