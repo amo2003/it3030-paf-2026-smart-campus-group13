@@ -15,6 +15,7 @@ function TicketDetailsPage() {
   const [rejectReason, setRejectReason] = useState("");
   const [resolutionNotes, setResolutionNotes] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -62,13 +63,15 @@ function TicketDetailsPage() {
       await ticketService.updateStatus(id, status);
       fetchTicket();
     } catch (err) {
-      setError("Failed to update status");
+      setError(
+        err?.response?.data?.message || "Failed to update status"
+      );
     }
   };
 
   const assignTechnicianAction = async () => {
     try {
-      await ticketService.assignTechnician(id, { technicianName: technicianName });
+      await ticketService.assignTechnician(id, { technicianName });
       setTechnicianName("");
       fetchTicket();
     } catch (err) {
@@ -82,17 +85,21 @@ function TicketDetailsPage() {
       setRejectReason("");
       fetchTicket();
     } catch (err) {
-      setError("Failed to reject ticket");
+      setError(
+        err?.response?.data?.message || "Failed to reject ticket"
+      );
     }
   };
 
   const resolveTicketAction = async () => {
     try {
-      await ticketService.resolveTicket(id, { resolutionNotes: resolutionNotes });
+      await ticketService.resolveTicket(id, { resolutionNotes });
       setResolutionNotes("");
       fetchTicket();
     } catch (err) {
-      setError("Failed to resolve ticket");
+      setError(
+        err?.response?.data?.message || "Failed to resolve ticket"
+      );
     }
   };
 
@@ -103,11 +110,14 @@ function TicketDetailsPage() {
     formData.append("file", selectedFile);
 
     try {
-      await ticketService.uploadAttachment(id, formData);
+      const response = await ticketService.uploadAttachment(id, formData);
+      setUploadedFiles((prev) => [...prev, response.data]);
       setSelectedFile(null);
       fetchTicket();
     } catch (err) {
-      setError("Failed to upload attachment");
+      setError(
+        err?.response?.data?.message || "Failed to upload attachment"
+      );
     }
   };
 
@@ -117,66 +127,86 @@ function TicketDetailsPage() {
 
   return (
     <div className="page-container">
-      <h1>{ticket.title}</h1>
+      <div className="page-header">
+        <div>
+          <h1>{ticket.title}</h1>
+          <p className="subtext">Ticket details and actions</p>
+        </div>
+        <span className={`badge badge-${ticket.status?.toLowerCase()}`}>
+          {ticket.status}
+        </span>
+      </div>
+
       {error && <p className="error-text">{error}</p>}
 
-      <div className="details-box">
-        <p><strong>Description:</strong> {ticket.description}</p>
-        <p><strong>Status:</strong> {ticket.status}</p>
-        <p><strong>Priority:</strong> {ticket.priority}</p>
-        <p><strong>Category:</strong> {ticket.category}</p>
-        <p><strong>Preferred Contact:</strong> {ticket.preferredContact}</p>
-        <p><strong>Location:</strong> {ticket.resourceLocation}</p>
-        <p><strong>Created By:</strong> {ticket.createdBy}</p>
-        <p><strong>Assigned Technician:</strong> {ticket.assignedTechnician || "Not Assigned"}</p>
-        <p><strong>Resolution Notes:</strong> {ticket.resolutionNotes || "-"}</p>
-        <p><strong>Rejection Reason:</strong> {ticket.rejectionReason || "-"}</p>
+      <div className="details-grid">
+        <div className="details-box">
+          <h3>Ticket Information</h3>
+          <p><strong>Description:</strong> {ticket.description}</p>
+          <p><strong>Priority:</strong> {ticket.priority}</p>
+          <p><strong>Category:</strong> {ticket.category}</p>
+          <p><strong>Preferred Contact:</strong> {ticket.preferredContact}</p>
+          <p><strong>Location:</strong> {ticket.resourceLocation}</p>
+          <p><strong>Created By:</strong> {ticket.createdBy}</p>
+          <p><strong>Assigned Technician:</strong> {ticket.assignedTechnician || "Not Assigned"}</p>
+          <p><strong>Resolution Notes:</strong> {ticket.resolutionNotes || "-"}</p>
+          <p><strong>Rejection Reason:</strong> {ticket.rejectionReason || "-"}</p>
+        </div>
+
+        <div className="details-box">
+          <h3>Quick Actions</h3>
+          <div className="button-group">
+            <button onClick={() => changeStatus("IN_PROGRESS")}>Mark IN_PROGRESS</button>
+            <button onClick={() => changeStatus("CLOSED")}>Mark CLOSED</button>
+          </div>
+
+          <label>Assign Technician</label>
+          <input
+            type="text"
+            placeholder="Technician Name"
+            value={technicianName}
+            onChange={(e) => setTechnicianName(e.target.value)}
+          />
+          <button onClick={assignTechnicianAction}>Assign</button>
+
+          <label>Resolution Notes</label>
+          <textarea
+            placeholder="Resolution Notes"
+            value={resolutionNotes}
+            onChange={(e) => setResolutionNotes(e.target.value)}
+          />
+          <button onClick={resolveTicketAction}>Resolve Ticket</button>
+
+          <label>Reject Reason</label>
+          <textarea
+            placeholder="Reject Reason"
+            value={rejectReason}
+            onChange={(e) => setRejectReason(e.target.value)}
+          />
+          <button className="danger-btn" onClick={rejectTicketAction}>Reject Ticket</button>
+        </div>
       </div>
 
       <div className="action-box">
-        <h3>Update Status</h3>
-        <button onClick={() => changeStatus("IN_PROGRESS")}>Mark IN_PROGRESS</button>
-        <button onClick={() => changeStatus("CLOSED")}>Mark CLOSED</button>
-      </div>
+        <h3>Attachment Upload</h3>
+        <div className="upload-row">
+          <input
+            type="file"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          />
+          <button onClick={uploadFile}>Upload</button>
+        </div>
 
-      <div className="action-box">
-        <h3>Assign Technician</h3>
-        <input
-          type="text"
-          placeholder="Technician Name"
-          value={technicianName}
-          onChange={(e) => setTechnicianName(e.target.value)}
-        />
-        <button onClick={assignTechnicianAction}>Assign</button>
-      </div>
-
-      <div className="action-box">
-        <h3>Resolve Ticket</h3>
-        <textarea
-          placeholder="Resolution Notes"
-          value={resolutionNotes}
-          onChange={(e) => setResolutionNotes(e.target.value)}
-        />
-        <button onClick={resolveTicketAction}>Resolve</button>
-      </div>
-
-      <div className="action-box">
-        <h3>Reject Ticket</h3>
-        <textarea
-          placeholder="Reject Reason"
-          value={rejectReason}
-          onChange={(e) => setRejectReason(e.target.value)}
-        />
-        <button onClick={rejectTicketAction}>Reject</button>
-      </div>
-
-      <div className="action-box">
-        <h3>Upload Attachment</h3>
-        <input
-          type="file"
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
-        <button onClick={uploadFile}>Upload</button>
+        {uploadedFiles.length > 0 && (
+          <div className="attachment-preview-grid">
+            {uploadedFiles.map((file, index) => (
+              <div key={index} className="attachment-card">
+                <p>{file.fileName}</p>
+                <small>{file.filePath}</small>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="action-box">
