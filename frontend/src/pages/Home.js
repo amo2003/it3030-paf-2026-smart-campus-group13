@@ -1,64 +1,194 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 const features = [
-  { icon: '📅', title: 'Easy Booking', desc: 'Reserve campus resources in seconds with a simple form.' },
-  { icon: '✅', title: 'Admin Approval', desc: 'Bookings go through an approval workflow for fair access.' },
-  { icon: '📧', title: 'Email Notifications', desc: 'Get notified instantly when your booking is approved or rejected.' },
-  { icon: '🔍', title: 'Track Status', desc: 'Check your booking status anytime — pending, approved, or cancelled.' },
+  {
+    icon: '📅',
+    title: 'Easy Booking',
+    desc: 'Reserve lecture halls, labs, and meeting rooms within seconds using our streamlined booking flow.',
+  },
+  {
+    icon: '✅',
+    title: 'Approval Workflow',
+    desc: 'All bookings pass through an intelligent approval process for better resource management.',
+  },
+  {
+    icon: '📧',
+    title: 'Smart Notifications',
+    desc: 'Receive instant email alerts when bookings are approved, rejected, or updated.',
+  },
+  {
+    icon: '📊',
+    title: 'Live Tracking',
+    desc: 'Track booking status and monitor activity with real-time updates and analytics.',
+  },
+];
+
+const stats = [
+  { value: '10K+', label: 'Bookings Managed' },
+  { value: '250+', label: 'Campus Resources' },
+  { value: '99.9%', label: 'System Reliability' },
+  { value: '24/7', label: 'Availability' },
 ];
 
 function Home() {
   return (
-    <div>
-      <section className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white py-24 px-6 text-center">
-        <h1 className="text-5xl font-extrabold mb-4">Smart Campus Booking</h1>
-        <p className="text-xl text-indigo-100 max-w-2xl mx-auto mb-8">
-          Reserve lecture halls, labs, and meeting rooms on campus — fast, simple, and transparent.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/book" className="bg-white text-indigo-600 font-semibold px-8 py-3 rounded-full shadow hover:bg-indigo-50 transition">
-            Book a Resource
-          </Link>
-          <Link to="/bookings" className="border border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-indigo-600 transition">
-            View All Bookings
-          </Link>
+    <div className="home-page">
+
+      {/* HERO SECTION */}
+      <section className="hero-section">
+
+        <div className="hero-bg-glow hero-glow-1"></div>
+        <div className="hero-bg-glow hero-glow-2"></div>
+
+        <div className="hero-content">
+
+          <div className="hero-badge">
+            🚀 Smart Digital Campus Platform
+          </div>
+
+          <h1>
+            Next Generation
+            <span> Campus Booking </span>
+            Experience
+          </h1>
+
+          <p>
+            Simplify university resource reservations with a powerful,
+            intelligent, and beautifully designed booking management system.
+          </p>
+
+          <div className="hero-buttons">
+            <Link to="/reslist" className="hero-btn primary-btn">
+              Book Resource
+            </Link>
+
+            <Link to="/tickets/create" className="hero-btn secondary-btn">
+              Complain Issues 
+            </Link>
+          </div>
+
+          <div className="hero-stats">
+            {stats.map((stat) => (
+              <div key={stat.label} className="hero-stat-card">
+                <h3>{stat.value}</h3>
+                <p>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
+
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">How It Works</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition">
-              <div className="text-4xl mb-3">{f.icon}</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-1">{f.title}</h3>
-              <p className="text-gray-500 text-sm">{f.desc}</p>
+      {/* FEATURES */}
+      <section className="features-section">
+
+        <div className="section-header">
+          <span>POWERFUL FEATURES</span>
+          <h2>Everything You Need</h2>
+          <p>
+            Designed for modern campuses with speed,
+            transparency, and user experience in mind.
+          </p>
+        </div>
+
+        <div className="features-grid">
+
+          {features.map((feature) => (
+            <div key={feature.title} className="feature-card">
+
+              <div className="feature-icon">
+                {feature.icon}
+              </div>
+
+              <h3>{feature.title}</h3>
+
+              <p>{feature.desc}</p>
+
+              <div className="feature-line"></div>
+
             </div>
           ))}
+
         </div>
+
       </section>
 
-      <section className="bg-indigo-50 py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-8">Quick Actions</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Link to="/book" className="bg-indigo-600 text-white rounded-xl py-6 px-4 font-semibold hover:bg-indigo-700 transition">
-              + New Booking
-            </Link>
-            <Link to="/my-bookings" className="bg-white text-indigo-600 border border-indigo-200 rounded-xl py-6 px-4 font-semibold hover:bg-indigo-50 transition">
-              My Bookings
-            </Link>
-            <Link to="/admin" className="bg-white text-purple-600 border border-purple-200 rounded-xl py-6 px-4 font-semibold hover:bg-purple-50 transition">
-              Admin Panel
-            </Link>
+      {/* CAMPUS GALLERY — pure image section, no navigation */}
+      <section className="gallery-section">
+        <div className="gallery-container">
+
+          <div className="section-header">
+            <span>OUR CAMPUS</span>
+            <h2>Campus Life</h2>
+            <p>A glimpse of the spaces and facilities you can book and explore.</p>
+          </div>
+
+          <div className="gallery-grid">
+            {/*  Replace each src with your own image paths */}
+            {/* Place images in frontend/public/images/ folder */}
+
+            <div className="gallery-item gallery-large">
+              <img src="/images/l1.jpg" alt="Campus" />
+              <div className="gallery-caption">Main Campus</div>
+            </div>
+
+            <div className="gallery-item">
+              <img src="/images/l2.jpg" alt="Lecture Hall" />
+              <div className="gallery-caption">Lecture Halls</div>
+            </div>
+
+            <div className="gallery-item">
+              <img src="/images/l3.jpg" alt="Labs" />
+              <div className="gallery-caption">Computer Labs</div>
+            </div>
+
+            <div className="gallery-item">
+              <img src="/images/l6.jpg" alt="Meeting Rooms" />
+              <div className="gallery-caption">Meeting Rooms</div>
+            </div>
+
+            <div className="gallery-item gallery-wide">
+              <img src="/images/l4.jpg" alt="Campus Grounds" />
+              <div className="gallery-caption">Campus Grounds</div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <footer className="bg-gray-800 text-gray-400 text-center py-6 text-sm">
-        © {new Date().getFullYear()} Smart Campus. All rights reserved.
+      {/* CTA SECTION */}
+      <section className="cta-section">
+
+        <div className="cta-card">
+
+          <h2>
+            Ready to Transform
+            Your Campus Experience?
+          </h2>
+
+          <p>
+            Start booking smarter and managing resources more efficiently.
+          </p>
+
+          <Link to="/reslist" className="cta-button">
+            Start Booking Now
+          </Link>
+
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <p>
+          © {new Date().getFullYear()} Smart Campus Booking System.
+          All rights reserved.
+        </p>
       </footer>
+
     </div>
   );
 }
