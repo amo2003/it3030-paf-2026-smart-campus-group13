@@ -3,6 +3,7 @@ import { useNavigate }         from "react-router-dom";
 import axios                   from "axios";
 import Layout                  from "../components/Layout";
 import { getUnreadCount }      from "../services/notificationService";
+import { addLocalNotification } from "../services/localNotifications";
 
 /* Stat card */
 const StatCard = ({ label, value, hint, iconBg, iconColor, icon }) => (
@@ -23,31 +24,50 @@ const StatCard = ({ label, value, hint, iconBg, iconColor, icon }) => (
 );
 
 const LoginSuccessPage = () => {
-  const [user, setUser]             = useState(null);
-  const [loading, setLoading]       = useState(true);
+  const [user, setUser]               = useState(null);
+  const [loading, setLoading]         = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
-  const navigate                    = useNavigate();
+  const navigate                      = useNavigate();
 
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/api/module4/auth/me", { withCredentials: true });
-      setUser(res.data);
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
-
-      if (res.data?.id) {
-        const unreadRes = await getUnreadCount(res.data.id);
-        setUnreadCount(unreadRes.data);
+    // If hardcoded admin is logged in, use localStorage directly — no backend call
+    const stored = localStorage.getItem("currentUser");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // hardcoded admin has id:0 — skip backend fetch
+      if (parsed.id === 0) {
+        setUser(parsed);
+        setLoading(false);
+        return;
       }
-    } catch {
-      navigate("/login");
-    } finally {
-      setLoading(false);
     }
-  };
 
-  fetchUser();
-}, [navigate]);
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/module4/auth/me", { withCredentials: true });
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("myTicketsName");
+        sessionStorage.clear();
+        localStorage.setItem("currentUser", JSON.stringify(res.data));
+        setUser(res.data);
+        addLocalNotification('LOGIN', 'Signed In', `Welcome back, ${res.data.name}! Signed in via Google.`);
+        if (res.data?.id) {
+          const unreadRes = await getUnreadCount(res.data.id);
+          setUnreadCount(unreadRes.data);
+        }
+        navigate("/");
+      } catch {
+        // Only redirect to login if no stored user at all
+        const stored2 = localStorage.getItem("currentUser");
+        if (!stored2) navigate("/login");
+        else { setUser(JSON.parse(stored2)); }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
 
   const initials = user?.name
     ? user.name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase()
@@ -66,7 +86,9 @@ const LoginSuccessPage = () => {
         {/* Header */}
         <div style={{ marginBottom: 24 }}>
           <h2 className="m4-page-title">My Profile</h2>
-          <p className="m4-page-sub">Signed in via Google OAuth 2.0</p>
+          <p className="m4-page-sub">
+            {user?.id === 0 ? "Signed in as Administrator" : "Signed in via Google OAuth 2.0"}
+          </p>
         </div>
 
         {loading ? (
