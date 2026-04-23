@@ -1,11 +1,11 @@
-/* ── Navbar ── */
+/*  Navbar  */
 .navbar {
   background: #fff;
   border-bottom: 1px solid #e8edf5;
   position: sticky;
   top: 0;
   z-index: 200;
-  box-shadow: 0 2px 16px rgba(79,70,229,.07);
+  box-shadow: 0 2px 16px rgba(68, 67, 87, 0.07);
 }
 .navbar-inner {
   max-width: 1280px;
@@ -36,7 +36,7 @@
 .nav-link {
   font-size: 13px;
   font-weight: 500;
-  color: #64748b;
+  color: rgb(63, 76, 104);
   text-decoration: none;
   padding: 7px 13px;
   border-radius: 9px;
@@ -85,12 +85,12 @@
 .nav-login-btn:hover { opacity: .9; transform: translateY(-1px); }
 .nav-login-outline {
   font-size: 13px; font-weight: 600;
-  background: none; color: #64748b;
-  border: 1.5px solid #e2e8f0; padding: 8px 16px; border-radius: 10px;
+  background: none; color: #0b0c0e;
+  border: 1.5px solid #5400cb; padding: 8px 16px; border-radius: 10px;
   cursor: pointer; font-family: inherit; text-decoration: none;
   transition: background .15s, border-color .15s; display: inline-block;
 }
-.nav-login-outline:hover { background: #f8fafc; border-color: #cbd5e1; }
+.nav-login-outline:hover { background: #f8fafc; border-color: #8b001c; }
 .nav-hamburger {
   display: none; background: none; border: none; cursor: pointer;
   color: #64748b; padding: 6px; border-radius: 8px;
