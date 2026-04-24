@@ -1,0 +1,29 @@
+.res-modal-overlay {
+  position: fixed; inset: 0; background: rgba(15,23,42,.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: 24px; backdrop-filter: blur(4px);
+}
+.res-modal-box {
+  background: #fff; border-radius: 24px; width: 100%; max-width: 680px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.22); overflow: hidden;
+  animation: modalPop .2s ease;
+}
+@keyframes modalPop { from { opacity:0; transform:scale(.95); } to { opacity:1; transform:scale(1); } }
+.res-modal-header {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: #fff; padding: 22px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.res-modal-header h2 { font-size: 20px; font-weight: 800; }
+.res-modal-header p  { font-size: 12px; color: #93c5fd; margin-top: 3px; }
+.res-modal-close {
+  background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.2);
+  padding: 7px 16px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: background .15s;
+}
+.res-modal-close:hover { background: rgba(255,255,255,.25); }
+.res-modal-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.res-modal-field .field-label { font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 4px; }
+.res-modal-field .field-value { font-size: 14px; font-weight: 700; color: #0f172a; }
+.res-modal-field.full { grid-column: 1 / -1; }
+@media (max-width: 560px) { .res-modal-body { grid-template-columns: 1fr; } .res-modal-field.full { grid-column: 1; } }

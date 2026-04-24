@@ -1,0 +1,101 @@
+.ticket-list-page { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+.ticket-list-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; margin-bottom: 32px; flex-wrap: wrap;
+}
+.ticket-list-header h1 { font-size: 30px; font-weight: 800; color: #1e293b; }
+.ticket-list-header p  { font-size: 13px; color: #94a3b8; margin-top: 5px; }
+.btn-create {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff; font-size: 13px; font-weight: 700;
+  padding: 11px 22px; border-radius: 12px; text-decoration: none;
+  box-shadow: 0 4px 14px rgba(249,115,22,.3);
+  transition: opacity .15s, transform .1s; display: inline-block;
+}
+.btn-create:hover { opacity: .9; transform: scale(1.02); }
+
+/* Stats */
+.ticket-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px; margin-bottom: 28px;
+}
+.ticket-stat {
+  background: #fff; border-radius: 16px; padding: 18px 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06); text-align: center;
+  border-top: 3px solid #e2e8f0; transition: transform .15s;
+}
+.ticket-stat:hover { transform: translateY(-2px); }
+.ticket-stat.total  { border-top-color: #6366f1; }
+.ticket-stat.open   { border-top-color: #f97316; }
+.ticket-stat.prog   { border-top-color: #3b82f6; }
+.ticket-stat.res    { border-top-color: #10b981; }
+.ticket-stat.closed { border-top-color: #94a3b8; }
+.ticket-stat.rej    { border-top-color: #ef4444; }
+.ticket-stat-val   { font-size: 28px; font-weight: 800; color: #1e293b; }
+.ticket-stat-label { font-size: 11px; color: #94a3b8; font-weight: 600; margin-top: 4px; }
+
+/* Filters */
+.ticket-filters {
+  display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; align-items: center;
+}
+.ticket-filters input,
+.ticket-filters select {
+  border: 1.5px solid #e2e8f0; border-radius: 12px;
+  padding: 10px 14px; font-size: 13px; font-family: inherit;
+  color: #1e293b; outline: none; background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+}
+.ticket-filters input { flex: 1; min-width: 200px; }
+.ticket-filters input:focus,
+.ticket-filters select:focus { border-color: #f97316; box-shadow: 0 0 0 3px rgba(249,115,22,.1); }
+
+/* Grid */
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+.ticket-card {
+  background: #fff; border-radius: 20px; padding: 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  border: 1px solid #f1f5f9; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform .2s, box-shadow .2s;
+  border-left: 4px solid #e2e8f0;
+}
+.ticket-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,.1); }
+.ticket-card.open   { border-left-color: #f97316; }
+.ticket-card.in_progress { border-left-color: #3b82f6; }
+.ticket-card.resolved    { border-left-color: #10b981; }
+.ticket-card.closed      { border-left-color: #94a3b8; }
+.ticket-card.rejected    { border-left-color: #ef4444; }
+
+.ticket-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.ticket-card-top h3 { font-size: 15px; font-weight: 800; color: #1e293b; line-height: 1.3; }
+.ticket-desc { font-size: 13px; color: #64748b; line-height: 1.55; }
+.ticket-meta-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.meta-pill {
+  font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  background: #f1f5f9; color: #475569; letter-spacing: .3px;
+}
+.meta-pill.priority-pill.HIGH   { background: #fee2e2; color: #991b1b; }
+.meta-pill.priority-pill.MEDIUM { background: #fef3c7; color: #92400e; }
+.meta-pill.priority-pill.LOW    { background: #d1fae5; color: #065f46; }
+.ticket-card p { font-size: 12px; color: #64748b; }
+.ticket-card p strong { color: #374151; }
+
+/* Status badges */
+.badge {
+  font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+  white-space: nowrap; letter-spacing: .3px; flex-shrink: 0;
+}
+.badge-open        { background: #fff7ed; color: #c2410c; }
+.badge-in_progress { background: #eff6ff; color: #1d4ed8; }
+.badge-resolved    { background: #f0fdf4; color: #166534; }
+.badge-closed      { background: #f8fafc; color: #475569; }
+.badge-rejected    { background: #fef2f2; color: #991b1b; }
+
+.ticket-empty { text-align: center; padding: 80px 24px; color: #94a3b8; font-size: 14px; }
+.error-text   { color: #ef4444; font-size: 13px; margin-bottom: 16px; }

@@ -1,0 +1,45 @@
+.res-catalog-card {
+  background: #fff; border-radius: 24px; padding: 24px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.07);
+  border: 1px solid #f1f5f9;
+  transition: transform .2s, box-shadow .2s;
+}
+.res-catalog-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.11); }
+
+.res-catalog-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.res-catalog-card-name { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.2; }
+.res-catalog-card-code { font-size: 12px; color: #94a3b8; font-weight: 600; margin-top: 4px; }
+
+.res-catalog-status {
+  font-size: 10px; font-weight: 800; padding: 5px 12px; border-radius: 20px;
+  white-space: nowrap; flex-shrink: 0; letter-spacing: .4px;
+}
+.res-catalog-status.ACTIVE            { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+.res-catalog-status.OUT_OF_SERVICE    { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.res-catalog-status.UNDER_MAINTENANCE { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+.res-catalog-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.res-catalog-meta-item .meta-label { font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 3px; }
+.res-catalog-meta-item .meta-value { font-size: 14px; font-weight: 700; color: #0f172a; }
+
+.res-catalog-desc { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 16px; }
+
+.res-oos-banner {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px;
+  padding: 10px 14px; font-size: 12px; color: #dc2626; margin-bottom: 16px;
+}
+
+.res-catalog-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.res-catalog-status-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.rc-btn {
+  font-size: 12px; font-weight: 700; padding: 9px 16px; border-radius: 11px;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: opacity .15s, transform .1s;
+}
+.rc-btn:hover { opacity: .88; transform: scale(1.02); }
+.rc-btn.dark    { background: #0f172a; color: #fff; }
+.rc-btn.blue    { background: #2563eb; color: #fff; }
+.rc-btn.rose    { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+.rc-btn.emerald { background: #059669; color: #fff; }
+.rc-btn.amber   { background: #d97706; color: #fff; }

@@ -1,0 +1,54 @@
+.checkin-page { max-width: 520px; margin: 0 auto; padding: 40px 24px; }
+.checkin-back {
+  color: #4f46e5; font-size: 13px; font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  margin-bottom: 24px; background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 0;
+}
+.checkin-back:hover { text-decoration: underline; }
+
+.checkin-card {
+  border-radius: 24px; padding: 36px 28px; text-align: center;
+  border: 2px solid #e2e8f0;
+}
+.checkin-card.approved { border-color: #6ee7b7; background: linear-gradient(160deg, #f0fdf4, #ecfdf5); }
+.checkin-card.rejected { border-color: #fca5a5; background: linear-gradient(160deg, #fef2f2, #fff1f2); }
+
+.checkin-status-icon {
+  width: 80px; height: 80px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px; margin: 0 auto 18px;
+}
+.checkin-card.approved .checkin-status-icon { background: #d1fae5; }
+.checkin-card.rejected .checkin-status-icon { background: #fee2e2; }
+
+.checkin-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.checkin-card.approved .checkin-title { color: #065f46; }
+.checkin-card.rejected .checkin-title { color: #991b1b; }
+
+.checkin-desc { font-size: 13px; margin-bottom: 24px; line-height: 1.6; }
+.checkin-card.approved .checkin-desc { color: #059669; }
+.checkin-card.rejected .checkin-desc { color: #dc2626; }
+
+.checkin-info-box {
+  background: #fff; border-radius: 14px; padding: 16px 18px;
+  text-align: left; margin-bottom: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  display: flex; flex-direction: column; gap: 7px;
+}
+.checkin-info-row { font-size: 13px; color: #64748b; }
+.checkin-info-row strong { color: #1e293b; font-weight: 700; }
+
+.checkin-qr-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.checkin-qr-box {
+  background: #fff; padding: 16px; border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1); display: inline-block;
+}
+.checkin-qr-hint { font-size: 11px; color: #94a3b8; }
+
+.checkin-reject-reason { font-size: 12px; color: #f87171; margin-top: 12px; }
+
+.state-msg { text-align: center; padding: 80px 24px; color: #94a3b8; font-size: 14px; }
+.state-msg.error { color: #ef4444; }

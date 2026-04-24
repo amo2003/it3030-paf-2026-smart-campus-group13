@@ -1,0 +1,186 @@
+/* 
+   ADMIN PANEL — Advanced CSS
+ */
+
+.admin-panel-page {
+  max-width: 1400px; margin: 0 auto; padding: 40px 24px;
+  min-height: 100vh; background: #f4f6fb;
+  margin-top: 3rem;
+  border-radius: 20px;
+}
+
+/* ── Hero header ── */
+.admin-panel-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  border-radius: 24px; padding: 28px 36px; margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  box-shadow: 0 12px 40px rgba(15,23,42,.3);
+  position: relative; overflow: hidden;
+}
+.admin-panel-hero::after {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: rgba(99,102,241,.12);
+  
+}
+.admin-panel-hero-text h1 {
+  font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 5px; letter-spacing: -.5px;
+}
+.admin-panel-hero-text p { font-size: 13px; color: rgba(255,255,255,.6); }
+.admin-panel-hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+  color: #fff; font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; letter-spacing: .4px;
+}
+
+/*  Tab bar  */
+.tab-bar {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px;
+  background: #fff; padding: 8px; border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06); border: 1px solid #e8edf5;
+  width: fit-content;
+}
+.tab-btn {
+  padding: 9px 20px; border-radius: 11px; font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer; font-family: inherit;
+  background: transparent; color: #64748b;
+  transition: all .15s; letter-spacing: .3px;
+}
+.tab-btn:hover { background: #f1f5f9; color: #1e293b; }
+.tab-btn.active {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; box-shadow: 0 4px 14px rgba(79,70,229,.35);
+}
+.tab-btn.active.PENDING   { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 14px rgba(245,158,11,.35); }
+.tab-btn.active.APPROVED  { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16,185,129,.35); }
+.tab-btn.active.REJECTED  { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239,68,68,.35); }
+.tab-btn.active.CANCELLED { background: linear-gradient(135deg, #94a3b8, #64748b); }
+
+/* ── Table ── */
+.admin-table-wrap {
+  overflow-x: auto; border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  border: 1px solid #e8edf5;
+}
+.admin-table { width: 100%; background: #fff; border-collapse: collapse; font-size: 13px; }
+.admin-table thead {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-bottom: 2px solid #e8edf5;
+}
+.admin-table th {
+  padding: 14px 16px; text-align: left;
+  font-size: 10px; font-weight: 900; color: #64748b;
+  text-transform: uppercase; letter-spacing: .8px; white-space: nowrap;
+}
+.admin-table td {
+  padding: 14px 16px; color: #475569;
+  border-top: 1px solid #f1f5f9; vertical-align: middle;
+}
+.admin-table tbody tr { transition: background .12s; }
+.admin-table tbody tr:hover { background: #fafbff; }
+.admin-table .id-cell { font-weight: 900; color: #1e293b; font-size: 14px; }
+.admin-table .truncate-cell {
+  max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ── Action buttons ── */
+.action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.act-btn {
+  font-size: 11px; font-weight: 800; padding: 6px 14px; border-radius: 9px;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: opacity .15s, transform .1s; white-space: nowrap;
+  letter-spacing: .2px;
+}
+.act-btn:hover { opacity: .88; transform: scale(1.04); }
+.act-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+.act-btn.approve {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff; box-shadow: 0 3px 10px rgba(16,185,129,.3);
+}
+.act-btn.reject {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff; box-shadow: 0 3px 10px rgba(239,68,68,.3);
+}
+.act-btn.cancel {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff; box-shadow: 0 3px 10px rgba(245,158,11,.3);
+}
+.act-btn.delete {
+  background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0;
+}
+.act-btn.delete:hover { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+
+/* ── Empty state ── */
+.admin-empty {
+  text-align: center; padding: 80px 24px;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid #e8edf5;
+}
+.admin-empty .empty-icon { font-size: 56px; margin-bottom: 16px; }
+.admin-empty p { color: #94a3b8; font-size: 15px; }
+
+/* ── Reject modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: 24px; backdrop-filter: blur(6px);
+}
+.modal-box {
+  background: #fff; border-radius: 24px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.22);
+  padding: 0; width: 100%; max-width: 460px;
+  overflow: hidden; animation: modalPop .2s ease;
+}
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-header {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  padding: 20px 24px; display: flex; align-items: center; gap: 12px;
+}
+.modal-header-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.modal-box h2 { font-size: 17px; font-weight: 800; color: #fff; margin: 0; }
+.modal-box p  { font-size: 12px; color: rgba(255,255,255,.75); margin: 3px 0 0; }
+.modal-body { padding: 24px; }
+.modal-body label {
+  display: block; font-size: 12px; font-weight: 800; color: #374151;
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px;
+}
+.modal-box textarea {
+  width: 100%; border: 1.5px solid #e2e8f0; border-radius: 12px;
+  padding: 12px 14px; font-size: 13px; font-family: inherit;
+  color: #1e293b; outline: none; resize: vertical; min-height: 90px;
+  background: #f8fafc; transition: border-color .15s, box-shadow .15s;
+  margin-bottom: 18px;
+}
+.modal-box textarea:focus {
+  border-color: #ef4444; background: #fff;
+  box-shadow: 0 0 0 3px rgba(239,68,68,.1);
+}
+.modal-actions { display: flex; gap: 10px; }
+.modal-btn-confirm {
+  flex: 1; background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff; font-size: 14px; font-weight: 800;
+  padding: 13px; border-radius: 12px; border: none; cursor: pointer;
+  font-family: inherit; box-shadow: 0 4px 14px rgba(239,68,68,.35);
+  transition: opacity .15s;
+}
+.modal-btn-confirm:hover { opacity: .9; }
+.modal-btn-confirm:disabled { opacity: .5; cursor: not-allowed; }
+.modal-btn-cancel {
+  flex: 1; background: #f1f5f9; color: #475569; font-size: 14px; font-weight: 700;
+  padding: 13px; border-radius: 12px; border: 1px solid #e2e8f0;
+  cursor: pointer; font-family: inherit; transition: background .15s;
+}
+.modal-btn-cancel:hover { background: #e2e8f0; }
+
+.state-msg { text-align: center; padding: 60px 24px; color: #94a3b8; font-size: 14px; }
+.state-msg.error { color: #ef4444; }
