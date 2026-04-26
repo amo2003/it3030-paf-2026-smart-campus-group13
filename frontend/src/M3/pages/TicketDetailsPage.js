@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ticketService from "../services/ticketService";
+import { addLocalNotification } from "../../M4/services/localNotifications";
 import "./TicketDetailsPage.css";
 
 function TicketDetailsPage() {
@@ -46,17 +47,33 @@ function TicketDetailsPage() {
     catch { setError("Failed to assign technician"); }
   };
 
+  const resolveTicketAction = async () => {
+    setError("");
+    try {
+      await ticketService.resolveTicket(id, { resolutionNotes });
+      addLocalNotification(
+        'TICKET_RESOLVED',
+        'Ticket Resolved',
+        `Ticket #${id} "${ticket?.title}" has been resolved. Notes: ${resolutionNotes || 'N/A'}`
+      );
+      setResolutionNotes(""); reload();
+    }
+    catch (e) { setError(e?.response?.data?.message || "Failed to resolve ticket"); }
+  };
+
   const rejectTicketAction = async () => {
     if (!rejectReason.trim()) return;
     setError("");
-    try { await ticketService.rejectTicket(id, { reason: rejectReason }); setRejectReason(""); reload(); }
+    try {
+      await ticketService.rejectTicket(id, { reason: rejectReason });
+      addLocalNotification(
+        'TICKET_REJECTED',
+        'Ticket Rejected',
+        `Ticket #${id} "${ticket?.title}" was rejected. Reason: ${rejectReason}`
+      );
+      setRejectReason(""); reload();
+    }
     catch (e) { setError(e?.response?.data?.message || "Failed to reject ticket"); }
-  };
-
-  const resolveTicketAction = async () => {
-    setError("");
-    try { await ticketService.resolveTicket(id, { resolutionNotes }); setResolutionNotes(""); reload(); }
-    catch (e) { setError(e?.response?.data?.message || "Failed to resolve ticket"); }
   };
 
   const uploadFile = async () => {
