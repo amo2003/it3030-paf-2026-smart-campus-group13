@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ticketService from '../services/ticketService';
+import { addLocalNotification } from '../../M4/services/localNotifications';
 import './CreateTicketPage.css';
 
 const RESOURCES_API = 'http://localhost:8080/api/module1/resources';
@@ -46,7 +47,12 @@ function CreateTicketPage() {
     e.preventDefault(); setError('');
     try {
       await ticketService.createTicket(ticket);
-      navigate(`/tickets`);
+      addLocalNotification(
+        'TICKET_CREATED',
+        'Ticket Submitted',
+        `Ticket "${ticket.title}" (${ticket.priority} · ${ticket.category}) submitted by ${ticket.createdBy || 'you'} at ${ticket.resourceLocation || 'N/A'}.`
+      );
+      navigate(`/`);
     } catch (err) {
       setError(err?.response?.data?.message || 'Failed to create ticket');
     }
